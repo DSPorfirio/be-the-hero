@@ -13,9 +13,21 @@ routes.post('/sessions', celebrate({
     })
 }), SessionController.create);
 
+
+
 routes.get('/ongs', celebrate({
     [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown()
 }), OngsController.listAll);
+
+
+
+routes.get('/ongs/:id', celebrate({    
+    [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown(),
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.string().required()
+    })
+}), OngsController.listOne);
+
 
 
 routes.post('/ongs', celebrate({
@@ -29,11 +41,39 @@ routes.post('/ongs', celebrate({
 }), OngsController.create);
 
 
+
+routes.put('/ongs/:id', celebrate({
+    [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown(),
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.string().required()
+    }),
+
+    [Segments.BODY]: Joi.object().keys({
+        name: Joi.string(),
+        email: Joi.string().email(),
+        whatsapp: Joi.string().min(10).max(13),
+        city: Joi.string(),
+        uf: Joi.string().length(2)
+    })
+}), OngsController.update);
+
+
+
+routes.delete('/ongs/:id', celebrate({
+    [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown(),
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.string().required()
+    })
+}), OngsController.delete);
+
+
+
 routes.get('/incidents', celebrate({
     [Segments.QUERY]: Joi.object().keys({
         page: Joi.number()
     })
 }), IncidentController.listAll);
+
 
 
 routes.post('/incidents', celebrate({
@@ -46,11 +86,21 @@ routes.post('/incidents', celebrate({
 }), IncidentController.create);
 
 
-routes.get('/incidents/ong', celebrate({
+
+routes.get('/incidents/ong/', celebrate({
     [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown()
 }), IncidentController.listAllOng);
 
+routes.get('/incidents/ong/:id', celebrate({
+    [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown(),
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.string().required()
+    })
+}), IncidentController.listOne);
+
+
 routes.delete('/incidents/:id', celebrate({
+    [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown(),
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required()
     })
@@ -58,7 +108,19 @@ routes.delete('/incidents/:id', celebrate({
 
 
 
-routes.put('/incidents/:id', IncidentController.update);
+routes.put('/incidents/:id', celebrate({
+    [Segments.HEADERS]: Joi.object({authorization: Joi.string().required()}).unknown(),
+
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().required(),
+    }),
+
+    [Segments.BODY]: Joi.object().keys({
+        title: Joi.string(),
+        description: Joi.string(),
+        value: Joi.number()
+    })
+}), IncidentController.update);
 
 
 

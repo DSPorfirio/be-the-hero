@@ -26,26 +26,42 @@ export default function Profile() {
     }, [ongId]);
 
     async function handleDeleteIncident(id) {
-        try {
-            await api.delete(`incidents/${id}`, {
-                headers: {
-                    Authorization: ongId,
-                }
-            });
+        const deleted = await window.confirm("Deseja realmente deletar esse caso?");
 
-            setIncidents(incidents.filter(incident => incident.id != id));
-        } catch (err) {
-            alert('Erro ao deletar caso, tente novamente.');
+        if(deleted == true){
+            try {
+                await api.delete(`incidents/${id}`, {
+                    headers: {
+                        Authorization: ongId,
+                    }
+                });
+
+                setIncidents(incidents.filter(incident => incident.id != id));
+            } catch (err) {
+                alert('Erro ao deletar caso, tente novamente.');
+            }
+        } else {
+            
         }
     }
 
     function handleUpdateIncident(id) {
-
+        history.push(`/incident/update/${id}`);
     }
 
-    function handleLogout() {
-        localStorage.clear();
-        history.push('/');
+    async function handleLogout() {
+        const logout = await window.confirm("Deseja sair?");
+        
+        if(logout == true) {
+            await localStorage.clear();
+            history.push('/');
+        } else {
+            
+        }
+    }
+
+    function handleSettings() {
+        history.push('/settings');
     }
 
     return (
@@ -56,12 +72,16 @@ export default function Profile() {
 
                 <Link className="button" to="/incident/new">Cadastrar novo caso</Link>
 
+                <button onClick={handleSettings} type="button">
+                    <FiSettings size={18} color="#E02041" />
+                </button>
+
                 <button onClick={handleLogout} type="button">
                     <FiPower size={18} color="#E02041" />
                 </button>
             </header>
 
-            <h1>Casos cadastrados</h1>
+            <h1>Seus casos:</h1>
 
             <ul>
                 {incidents.map(incident => (
@@ -76,9 +96,9 @@ export default function Profile() {
                         <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(incident.value)}</p>
 
                         <div className="button-group">                              
-                            <Link className="update" to="/incident/update">
+                            <button onClick={() => handleUpdateIncident(incident.id)} type="button" className="update">
                                 <FiSettings size={18} color="#A8A83" />
-                            </Link>
+                            </button>
                             
                             <button onClick={() => handleDeleteIncident(incident.id)} type="button" className="delete">
                                 <FiTrash2 size={20} color="#A8A83" />

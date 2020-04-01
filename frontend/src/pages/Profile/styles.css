@@ -36,7 +36,7 @@
 }
 
 .profile-container header button:hover {
-    border-color: #999;
+    border-color: rgb(196, 196, 196);
 }
 
 .profile-container h1 {

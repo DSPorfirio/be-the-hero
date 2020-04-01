@@ -39,6 +39,23 @@ module.exports = {
         return response.json(incidents);
     },
 
+    async listOne(request, response) {
+        const { id }  = request.params;
+        const ong_id = request.headers.authorization;
+
+        const incident = await connection('incidents')
+        .where('id', id)
+        .select('*')
+        .first();
+
+        if(incident.ong_id != ong_id){
+            return response.status(401).json({error: "Operation not permitted."});
+        } else {
+            response.json(incident);
+        }
+    
+    },
+
     async delete(request, response) {
         const { id }  = request.params;
         const ong_id = request.headers.authorization;

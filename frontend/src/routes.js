@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import NewIncident from './pages/NewIncident';
 import UpdateIncident from './pages/UpdateIncident';
+import Settings from './pages/Settings';
 import { PrivateRoute } from './privateRoute';
 
 export default function Routes() {
@@ -16,9 +17,10 @@ export default function Routes() {
                 <Route path="/register" component={Register} />
 
                 <PrivateRoute path="/profile" component={Profile} />
-                <PrivateRoute path="/incident/new" component={NewIncident} />
+                <PrivateRoute path="/settings" component={Settings} />
 
-                <PrivateRoute path="/incident/update" component={UpdateIncident} />
+                <PrivateRoute path="/incident/new" component={NewIncident} />
+                <PrivateRoute path="/incident/update/:id" component={UpdateIncident} />
             </Switch>
         </BrowserRouter>
     );
