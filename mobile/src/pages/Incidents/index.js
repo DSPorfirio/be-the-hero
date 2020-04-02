@@ -37,6 +37,8 @@ export default function Incidents() {
         setIncidents([...incidents, ...response.data]);
         setTotal(response.headers['x-total-count']);
 
+        
+
         setPage(page + 1);
         setLoading(false);
     }
@@ -61,7 +63,7 @@ export default function Incidents() {
                 style={styles.incidentList}
                 data={incidents}
                 keyExtractor={incident => String(incident.id)}
-                //showsVerticalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
                 onEndReached={loadIncidents}
                 onEndReachedThreshold={0.3}
                 renderItem={({ item: incident }) => (
