@@ -2,16 +2,19 @@
 
 ![](frontend/src/assets/logo.svg)
 
-Be The Hero é uma aplicação onde heróis podem salvar o dia!
+Be The Hero, onde heróis podem salvar o dia!
 
-#### Web: 
+#### :computer: Web: 
 É possível cadastrar ONGs, entidades ou grupos sociais.
-Cada grupo poderá cadastrar novos casos com informações dados de para contato e valor para sua realização.
+Cada grupo poderá cadastrar novos casos com informações, dados para contato e valor para sua realização.
 
-#### Mobile: 
+<p align="center">
+  <img src="betheheroweb.gif">
+</p>
+
+#### :iphone: Mobile: 
 Ao acessar a aplicação mobile, os casos cadastrados pelas ONGs serão exibidos em tela, o usuário poderá 
-facilmente entrar em contato com a ONG do caso escolhido via E-mail ou Whatsapp, para combinar o valor e a forma de 
-doação para solucionar o caso.
+facilmente entrar em contato com a ONG do caso escolhido via E-mail ou Whatsapp (Click to chat :email:), para combinar o valor e a forma de doação para solucionar o caso.
 
-#### Dev:
-Essa aplicação é fruto da 11ª Semana OmniStack da Rocketseat, utilizando Node.js, React, React Native.
+#### :rocket: Dev:
+O projeto foi desenvolvido durante a 11ª Semana OmniStack. Evento 100% gratuito da :rocket: Rocketseat, onde desenvolvemos uma aplicação utilizando Node.js, ReactJS e React Native, além de diversas ferramentas.
